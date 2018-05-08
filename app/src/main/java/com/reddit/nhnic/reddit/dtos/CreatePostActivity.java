@@ -38,8 +38,8 @@ public class CreatePostActivity extends GenericActivity {
     private void assignViews() {
         editTitle = findViewById(R.id.edit_title);
 
-        cancelButton = (TextView) findViewById(R.id.cancel_button);
-        confirmButton = (TextView) findViewById(R.id.confirm_button);
+        cancelButton = findViewById(R.id.cancel_button);
+        confirmButton = findViewById(R.id.confirm_button);
     }
 
     private void assignVariables(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class CreatePostActivity extends GenericActivity {
                 } else {
                     Toast.makeText(Application.getInstance(), getString(R.string.empty_title_message), Toast.LENGTH_SHORT).show();
                 }
-    }
+            }
         });
     }
 }
