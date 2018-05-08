@@ -3,7 +3,6 @@ package com.reddit.nhnic.reddit.dtos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import com.reddit.nhnic.reddit.app.GenericActivity;
 public class CreatePostActivity extends GenericActivity {
     private final String TAG = "CreatePostActivity";
 
-    private AutoCompleteTextView editTitle;
+    private EditText editTitle;
 
     private TextView cancelButton;
     private TextView confirmButton;
