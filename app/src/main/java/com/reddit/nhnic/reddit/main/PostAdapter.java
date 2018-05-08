@@ -1,5 +1,6 @@
 package com.reddit.nhnic.reddit.main;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public @NonNull ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
         CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
         final ViewHolder vh = new ViewHolder(v);
 
@@ -65,11 +66,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final PostDTO.Post post = posts.get(position);
 
         holder.title.setText(post.title);
 
+        /*
+            All modifications are made to the original entry in the array so that it updates the count dynamically.
+            When changes are made to an entry in a RecyclerView, it updates the item at that position in the layout.
+            As they change, it updates the value in the UI as well through a notifyItemChanged(int position) call which recalls this.
+         */
         holder.downvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +104,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
-    //taken from here: https://stackoverflow.com/questions/9769554/how-to-convert-number-into-k-thousands-m-million-and-b-billion-suffix-in-jsp
+    //function taken from here: https://stackoverflow.com/questions/9769554/how-to-convert-number-into-k-thousands-m-million-and-b-billion-suffix-in-jsp
     private static String withSuffix(long count) {
         if (count < 1000) return String.format("%s", count);
         int exp = (int) (Math.log(count) / Math.log(1000));
