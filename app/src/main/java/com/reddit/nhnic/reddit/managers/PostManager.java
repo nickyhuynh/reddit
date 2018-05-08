@@ -19,6 +19,7 @@ public enum PostManager {
 
     PostManager() {
         this.context = Application.getInstance();
+        posts = new ArrayList<>();
     }
 
     public void addPost(PostDTO.Post post) {
