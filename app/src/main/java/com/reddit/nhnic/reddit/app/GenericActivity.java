@@ -3,7 +3,7 @@ package com.reddit.nhnic.reddit.app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
-import com.reddit.nhnic.reddit.dtos.CreatePostActivity;
+import com.reddit.nhnic.reddit.main.CreatePostActivity;
 
 /**
  * Created by nhnic on 5/7/2018.

@@ -1,4 +1,4 @@
-package com.reddit.nhnic.reddit.dtos;
+package com.reddit.nhnic.reddit.main;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.reddit.nhnic.reddit.R;
-import com.reddit.nhnic.reddit.app.Application;
-import com.reddit.nhnic.reddit.managers.PostManager;
+import com.reddit.nhnic.reddit.dtos.PostDTO;
 
 import java.util.ArrayList;
 import java.util.Locale;

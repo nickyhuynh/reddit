@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".dtos.CreatePostActivity"/>
+        <activity android:name=".main.CreatePostActivity"/>
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.reddit.nhnic.reddit.dtos;
+package com.reddit.nhnic.reddit.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +29,9 @@ public class CreatePostActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
+        /*
+            These private functions are meant to add uniformity and classify code into usable chunks.
+         */
         assignViews();
         assignVariables(savedInstanceState);
         assignHandlers();
@@ -46,6 +49,10 @@ public class CreatePostActivity extends GenericActivity {
     }
 
     private void assignHandlers() {
+        /*
+            Results are handled in callback in MainActivity.
+            Constants.RESULT_OK leads to a topic being added.
+         */
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +61,9 @@ public class CreatePostActivity extends GenericActivity {
             }
         });
 
+        /*
+            Checks to see if the title editText is empty. If not, then send data through the callback and add it to the topic list.
+         */
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

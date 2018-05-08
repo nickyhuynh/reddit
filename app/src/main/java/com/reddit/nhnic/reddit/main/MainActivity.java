@@ -9,11 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.reddit.nhnic.reddit.R;
 import com.reddit.nhnic.reddit.app.Constants;
 import com.reddit.nhnic.reddit.app.GenericActivity;
-import com.reddit.nhnic.reddit.dtos.PostAdapter;
 import com.reddit.nhnic.reddit.dtos.PostDTO;
 import com.reddit.nhnic.reddit.managers.PostManager;
 
@@ -24,6 +22,9 @@ import com.reddit.nhnic.reddit.managers.PostManager;
 public class MainActivity extends GenericActivity {
     private final String TAG = "MainActivity";
 
+    /*
+        RecyclerView for displaying posts, as well as a variable rather than hard-coded layout and span count for grid layout.
+     */
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
 
@@ -42,8 +43,9 @@ public class MainActivity extends GenericActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        Log.d(TAG, requestCode + " : " + resultCode);
+        // If the result code was RESULT_OK then that means a topic was successfully filled out.
         if(resultCode == Constants.RESULT_OK) {
+            //Create a new post and add its attributes according to the data.
             PostDTO.Post post = new PostDTO.Post();
             post.title = data.getStringExtra("POST_DATA");
             post.upvotes = 0;
@@ -52,7 +54,7 @@ public class MainActivity extends GenericActivity {
         } else if(resultCode == Constants.RESULT_BAD){
             Log.d(TAG, "Create post cancelled.");
         } else {
-            Log.d(TAG, "Error");
+            Log.d(TAG, "Activity was closed unexpectedly.");
         }
     }
 
@@ -61,6 +63,9 @@ public class MainActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
+            These private functions are meant to add uniformity and classify code into usable chunks.
+         */
         assignViews();
         assignVariables(savedInstanceState);
         assignHandlers();
@@ -72,15 +77,15 @@ public class MainActivity extends GenericActivity {
     }
 
     private void assignVariables(Bundle savedInstanceState) {
+        /*
+            Since adapters work by accessing the original data structure, any changes made to the original
+            are reflected in the UI. That's why you pass the same object and operate on that.
+         */
         postAdapter = new PostAdapter(PostManager.INSTANCE.getPosts());
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this); //The default layout manager is a LinearLayoutManager, meaning single column list.
         currentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
-        if(savedInstanceState != null) {
-            currentLayoutManagerType = (LayoutManagerType) savedInstanceState.getSerializable(KEY_LAYOUT_MANAGER);
-        }
-
-        setRecyclerViewLayoutManager(currentLayoutManagerType);
+        postRecyclerView.setLayoutManager(layoutManager);
         postRecyclerView.setAdapter(postAdapter);
     }
 
@@ -91,39 +96,5 @@ public class MainActivity extends GenericActivity {
                 openCreatePost(Constants.ADD_POST);
             }
         });
-    }
-
-    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
-        int scrollPosition = 0;
-
-        // If a layout manager has already been set, get current scroll position.
-        if (postRecyclerView.getLayoutManager() != null) {
-            scrollPosition = ((LinearLayoutManager) postRecyclerView.getLayoutManager())
-                    .findFirstCompletelyVisibleItemPosition();
-        }
-
-        switch (layoutManagerType) {
-            case GRID_LAYOUT_MANAGER:
-                layoutManager = new GridLayoutManager(this, SPAN_COUNT);
-                currentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
-                break;
-            case LINEAR_LAYOUT_MANAGER:
-                layoutManager = new LinearLayoutManager(this);
-                currentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-                break;
-            default:
-                layoutManager = new LinearLayoutManager(this);
-                currentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-        }
-
-        postRecyclerView.setLayoutManager(layoutManager);
-        postRecyclerView.scrollToPosition(scrollPosition);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save currently selected layout manager.
-        savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, currentLayoutManagerType);
-        super.onSaveInstanceState(savedInstanceState);
     }
 }
