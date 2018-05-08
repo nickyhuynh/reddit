@@ -16,7 +16,10 @@ public class PostDTO {
         @SerializedName("title")
         public String title;
 
-        @SerializedName("link")
-        public String link;
+        @SerializedName("upvotes")
+        public int upvotes;
+
+        @SerializedName("downvotes")
+        public int downvotes;
     }
 }

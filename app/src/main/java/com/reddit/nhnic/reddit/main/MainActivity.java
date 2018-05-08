@@ -1,6 +1,7 @@
 package com.reddit.nhnic.reddit.main;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.reddit.nhnic.reddit.app.GenericActivity;
 
@@ -9,6 +10,7 @@ import com.reddit.nhnic.reddit.app.GenericActivity;
  */
 
 public class MainActivity extends GenericActivity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
