@@ -51,6 +51,7 @@ public class MainActivity extends GenericActivity {
             post.upvotes = 0;
             post.downvotes = 0;
             PostManager.INSTANCE.addPost(post);
+            postAdapter.notifyDataSetChanged();
         } else if(resultCode == Constants.RESULT_BAD){
             Log.d(TAG, "Create post cancelled.");
         } else {

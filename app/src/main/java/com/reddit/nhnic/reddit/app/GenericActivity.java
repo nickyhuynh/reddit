@@ -11,6 +11,7 @@ import com.reddit.nhnic.reddit.main.CreatePostActivity;
 
 /*
     The GenericActivity class serves as the base class so navigation is painless from any Activity.
+    Never to be called directly, but to be used as a parent class to new activities that need navigation.
  */
 public class GenericActivity extends AppCompatActivity {
 

@@ -13,6 +13,7 @@ import com.reddit.nhnic.reddit.R;
 import com.reddit.nhnic.reddit.dtos.PostDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -101,7 +102,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return Math.min(posts.size(), 20);
     }
 
     //function taken from here: https://stackoverflow.com/questions/9769554/how-to-convert-number-into-k-thousands-m-million-and-b-billion-suffix-in-jsp
