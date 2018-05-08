@@ -13,7 +13,8 @@ Intentional design decisions:
   used in this Manager, you can consistently operate on the same ArrayList when up/downvoting, adding posts, etc.
 * The use of a custom Application class. This is for access to Context when Managers need it as well as 
   initialization in the future  for libraries like Facebook, Firebase, or Branch.
-* A GenericActivity class that other activities derive from for navigation between different activities and modularity.
+* A GenericActivity class that other activities derive from for navigation between different activities 
+  and modularity.
 * DTOs even though there is no JSON at the moment, most data is now transferred between JSON objects, so with the 
   idea that the app  will eventually be dependent on an API, using a DTO seemed like the best choice.
 * Using a RecyclerView because:
