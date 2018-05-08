@@ -1,13 +1,20 @@
 package com.reddit.nhnic.reddit.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.reddit.nhnic.reddit.R;
+import com.reddit.nhnic.reddit.app.Constants;
 import com.reddit.nhnic.reddit.app.GenericActivity;
 import com.reddit.nhnic.reddit.dtos.PostAdapter;
+import com.reddit.nhnic.reddit.dtos.PostDTO;
 import com.reddit.nhnic.reddit.managers.PostManager;
 
 /**
@@ -30,7 +37,24 @@ public class MainActivity extends GenericActivity {
     protected PostAdapter postAdapter;
     protected RecyclerView.LayoutManager layoutManager;
 
+    private ImageView addPost;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        Log.d(TAG, requestCode + " : " + resultCode);
+        if(resultCode == Constants.RESULT_OK) {
+            PostDTO.Post post = new PostDTO.Post();
+            post.title = data.getStringExtra("POST_DATA");
+            post.upvotes = 0;
+            post.downvotes = 0;
+            PostManager.INSTANCE.addPost(post);
+        } else if(resultCode == Constants.RESULT_BAD){
+            Log.d(TAG, "Create post cancelled.");
+        } else {
+            Log.d(TAG, "Error");
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +63,12 @@ public class MainActivity extends GenericActivity {
 
         assignViews();
         assignVariables(savedInstanceState);
+        assignHandlers();
     }
 
     private void assignViews() {
         postRecyclerView = findViewById(R.id.posts_recycler_view);
+        addPost = findViewById(R.id.add_post);
     }
 
     private void assignVariables(Bundle savedInstanceState) {
@@ -56,6 +82,15 @@ public class MainActivity extends GenericActivity {
 
         setRecyclerViewLayoutManager(currentLayoutManagerType);
         postRecyclerView.setAdapter(postAdapter);
+    }
+
+    private void assignHandlers() {
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCreatePost(Constants.ADD_POST);
+            }
+        });
     }
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {

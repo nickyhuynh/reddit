@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">reddit</string>
     <string name="posts_title">Posts</string>
+    <string name="create_post_title">Create Post</string>
+    <string name="title_label">Title: </string>
+    <string name="create_post_hint">ex. (Cute Dogs)</string>
+    <string name="cancel_button_title">Cancel</string>
+    <string name="confirm_button_title">Confirm</string>
+    <string name="empty_title_message">Title message can\'t be blank!</string>
 </resources>
