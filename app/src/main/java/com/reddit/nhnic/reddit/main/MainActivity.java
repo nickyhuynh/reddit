@@ -80,7 +80,7 @@ public class MainActivity extends GenericActivity {
     private void assignVariables(Bundle savedInstanceState) {
         /*
             Since adapters work by accessing the original data structure, any changes made to the original
-            are reflected in the UI. That's why you pass the same object and operate on that.
+            are reflected in the UI through notifyDataSetChanged. That's why you pass the same object and operate on that.
          */
         postAdapter = new PostAdapter(PostManager.INSTANCE.getPosts());
         layoutManager = new LinearLayoutManager(this); //The default layout manager is a LinearLayoutManager, meaning single column list.

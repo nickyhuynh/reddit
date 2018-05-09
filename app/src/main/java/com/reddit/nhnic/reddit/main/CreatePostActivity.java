@@ -45,7 +45,6 @@ public class CreatePostActivity extends GenericActivity {
     }
 
     private void assignVariables(Bundle savedInstanceState) {
-        setFinishOnTouchOutside(false);
     }
 
     private void assignHandlers() {

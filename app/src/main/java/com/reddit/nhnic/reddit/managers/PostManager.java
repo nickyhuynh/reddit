@@ -1,15 +1,10 @@
 package com.reddit.nhnic.reddit.managers;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.reddit.nhnic.reddit.app.Application;
 import com.reddit.nhnic.reddit.dtos.PostDTO;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * Created by nhnic on 5/7/2018.
@@ -45,7 +40,6 @@ public enum PostManager {
                 return (o2.upvotes-o2.downvotes) - (o1.upvotes-o1.downvotes);
             }
         });
-        Log.d(TAG, posts.get(0).title);
     }
 
     public ArrayList<PostDTO.Post> getPosts() {
